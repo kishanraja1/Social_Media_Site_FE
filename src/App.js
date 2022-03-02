@@ -18,11 +18,11 @@ function App() {
   const newPostSubmitHandler =  (event) => {
     event.preventDefault();
     axios.post(
-      'http://localhost:3000/posts',{
+      'https://stormy-springs-28465.herokuapp.com/posts',{
         post:newPost
         })
         .then(() => {
-          axios.get('http://localhost:3000/posts')
+          axios.get('https://stormy-springs-28465.herokuapp.com/posts')
             .then((res) =>{
               setAllPosts(res.data) 
       })
@@ -37,10 +37,10 @@ function App() {
   // delete the post
   const handleDelete = (p)=>{
     axios
-        .delete(`http://localhost:3000/posts/${p._id}`)
+        .delete(`https://stormy-springs-28465.herokuapp.com/posts/${p._id}`)
         .then(()=>{
             axios
-                .get('http://localhost:3000/posts')
+                .get('https://stormy-springs-28465.herokuapp.com/posts')
                 .then((response)=>{
                     setAllPosts(response.data)
                 })
@@ -49,7 +49,7 @@ function App() {
 
   // what starts on page load
   useEffect(() => {
-    axios.get('http://localhost:3000/posts').then((res) => {
+    axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
       setAllPosts(res.data)
       console.log(res.data)
     }) 
