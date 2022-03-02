@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   // temporary data bc i cannot get the get bc of cors.
-  const [allPosts, setAllPosts] = useState([1,2,3,4,5])
+  const [allPosts, setAllPosts] = useState([])
   const [ name, setName] = useState('')
   const [ newPost, setNewPost] = useState('')
 
@@ -37,10 +37,10 @@ function App() {
   // delete the post
   const handleDelete = (p)=>{
     axios
-        .delete(`http://localhost:3000/characters/${p._id}`)
+        .delete(`http://localhost:3000/posts/${p._id}`)
         .then(()=>{
             axios
-                .get('http://localhost:3000/characters')
+                .get('http://localhost:3000/posts')
                 .then((response)=>{
                     setAllPosts(response.data)
                 })
@@ -50,6 +50,7 @@ function App() {
   // what starts on page load
   useEffect(() => {
     axios.get('http://localhost:3000/posts').then((res) => {
+      setAllPosts(res.data)
       console.log(res.data)
     }) 
   },[])
@@ -75,15 +76,15 @@ function App() {
            
           return (
             <>
-            <li>{post} 
+            <li key={post._id}>{post.post} 
             <br/>
-            <button onClick={handleDelete}>Delete</button>
-            
+            <button onClick={(event) => {
+                  handleDelete(post)
+            }}>Delete</button>
             </li>
 
             </>
           )
-
         })
       
       }
