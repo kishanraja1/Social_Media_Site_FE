@@ -1,18 +1,28 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react'
 import './App.css';
+import Button from '@mui/material/Button';
+// import DeleteIcon from '@mui/icons-material/Delete';
+import EditModal from './components/EditModal'
+import Register from './components/Register'
 
+
+// REMEMBER YOU NEED TO HAVE .REVERSE() IN EACH AXIOS.GET OR ELSE THE DATA
+// WILL WONT BE REVERSED FOR A RANDOM BUTTON 
 function App() {
-  // temporary data bc i cannot get the get bc of cors.
+
+//  form and list of all posts states
   const [allPosts, setAllPosts] = useState([])
   const [ name, setName] = useState('')
   const [ newPost, setNewPost] = useState('')
 
-  // const getPosts = () => {
-  //   axios.get('localhost:3000').then((res) => {
-  //     console.log(res.data)
-  //   })
-  // }
+
+  const getPosts = () => {
+    axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
+      setAllPosts(res.data.reverse())
+      // console.log(res.data)
+    }) 
+  }
 
   // for posting the new post
   const newPostSubmitHandler =  (event) => {
@@ -24,10 +34,11 @@ function App() {
         .then(() => {
           axios.get('https://stormy-springs-28465.herokuapp.com/posts')
             .then((res) =>{
-              setAllPosts(res.data) 
+              setAllPosts(res.data.reverse()) 
       })
-    }) 
+    })
   }
+
  // update state for the comment
  const commentText = (event) => {
   //  console.log(event.target.value)
@@ -42,21 +53,20 @@ function App() {
             axios
                 .get('https://stormy-springs-28465.herokuapp.com/posts')
                 .then((response)=>{
-                    setAllPosts(response.data)
+                    setAllPosts(response.data.reverse())
                 })
         })
   }
 
   // what starts on page load
   useEffect(() => {
-    axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
-      setAllPosts(res.data)
-      console.log(res.data)
-    }) 
+    getPosts()
+
   },[])
 
   return (
     <>
+    <Register setAllPosts={setAllPosts}/>
     <h1>Hi</h1>
     <form onSubmit={(event) => {
       newPostSubmitHandler(event)
@@ -64,29 +74,32 @@ function App() {
       {/* for name of poster. for now it will be static */}
       {/* Name: <input defaultValue={""} />
       <br></br> */}
-      Post: <textarea required onChange={commentText} />
+      Post: <input  className={'form-text-input'} required onChange={commentText} />
       <br></br>
-      <input type={'submit'}/>
-
+      <Button type={'submit'} variant="contained" color="success">
+                Submit
+      </Button>
     </form>
+    
     <div>
       <ul>
-        { 
+        {
         allPosts.map((post) => {
-           
-          return (
-            <>
-            <li key={post._id}>{post.post} 
-            <br/>
-            <button onClick={(event) => {
-                  handleDelete(post)
-            }}>Delete</button>
-            </li>
 
-            </>
-          )
+          return (
+            <li key={post._id}>{post.post}
+            <br/>
+            <Button color={'error'} variant={'contained'}onClick={(event) => {
+                  handleDelete(post)
+                }}>
+                  Delete
+                </Button>
+                <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
+                  getPosts()
+                } } />
+              </li>
+            )
         })
-      
       }
       </ul>
     </div>
@@ -99,9 +112,9 @@ export default App;
 
 // edit
 // either make a new page or make modal
-// fill with post name data. 
-// MODAL: use lightbox logic to click out of it? 
+// fill with post name data.
+// MODAL: use lightbox logic to click out of it?
 // MUI framework instead
-//  
-// 
-// 
+//
+//
+//
