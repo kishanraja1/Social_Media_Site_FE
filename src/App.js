@@ -83,28 +83,13 @@ function App() {
     
     <div>
       <ul>
-
-        { 
-          allPosts.map((post) => {
-            
-            return (
-            //  outter most container/ element must have a key
-              <li key={post._id}>
-                <div className='postDiv'>
-                {post.post} 
-                <br/>
-                <Button className={"form-button"} variant="contained" color={'error'}
-                onClick={(event) => {
-
         {
         allPosts.map((post) => {
 
           return (
-            <>
             <li key={post._id}>{post.post}
             <br/>
-            <button onClick={(event) => {
-
+            <Button color={'error'} variant={'contained'}onClick={(event) => {
                   handleDelete(post)
                 }}>
                   Delete
@@ -112,10 +97,7 @@ function App() {
                 <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
                   getPosts()
                 } } />
-                </div>
               </li>
-              // because react sucks
-              // because react sucks
             )
         })
       }
