@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import EditModal from './components/EditModal'
 import Register from './components/Register'
+import LikesAndDislikes from './components/likesAndDislikes'
 
 
 // REMEMBER YOU NEED TO HAVE .REVERSE() IN EACH AXIOS.GET OR ELSE THE DATA
@@ -29,7 +30,11 @@ function App() {
     event.preventDefault();
     axios.post(
       'https://stormy-springs-28465.herokuapp.com/posts',{
-        post:newPost
+        post:newPost,
+        likes:0,
+        dislikes:0,
+        likeBoolean:false,
+        dislikeBoolean:false
         })
         .then(() => {
           axios.get('https://stormy-springs-28465.herokuapp.com/posts')
@@ -97,6 +102,11 @@ function App() {
                 <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
                   getPosts()
                 } } />
+                <LikesAndDislikes allProps={post} likes={post.likes} 
+                dislikes={post.dislikes} id={post._id} likeBoolean={post.likeBoolean} dislikeBoolean={post.dislikeBoolean}
+                 getPostsFunction={ () => {
+                  getPosts()
+                } }/>
               </li>
             )
         })
