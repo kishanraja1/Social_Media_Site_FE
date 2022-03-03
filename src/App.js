@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react'
 import './App.css';
+import Register from './components/Register'
 
 function App() {
   // temporary data bc i cannot get the get bc of cors.
@@ -24,9 +25,9 @@ function App() {
         .then(() => {
           axios.get('https://stormy-springs-28465.herokuapp.com/posts')
             .then((res) =>{
-              setAllPosts(res.data) 
+              setAllPosts(res.data)
       })
-    }) 
+    })
   }
  // update state for the comment
  const commentText = (event) => {
@@ -51,12 +52,13 @@ function App() {
   useEffect(() => {
     axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
       setAllPosts(res.data)
-      console.log(res.data)
-    }) 
+      // console.log(res.data)
+    })
   },[])
 
   return (
     <>
+    <Register setAllPosts={setAllPosts}/>
     <h1>Hi</h1>
     <form onSubmit={(event) => {
       newPostSubmitHandler(event)
@@ -71,12 +73,12 @@ function App() {
     </form>
     <div>
       <ul>
-        { 
+        {
         allPosts.map((post) => {
-           
+
           return (
             <>
-            <li key={post._id}>{post.post} 
+            <li key={post._id}>{post.post}
             <br/>
             <button onClick={(event) => {
                   handleDelete(post)
@@ -86,7 +88,7 @@ function App() {
             </>
           )
         })
-      
+
       }
       </ul>
     </div>
@@ -99,9 +101,9 @@ export default App;
 
 // edit
 // either make a new page or make modal
-// fill with post name data. 
-// MODAL: use lightbox logic to click out of it? 
+// fill with post name data.
+// MODAL: use lightbox logic to click out of it?
 // MUI framework instead
-//  
-// 
-// 
+//
+//
+//
