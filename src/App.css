@@ -1,7 +1,23 @@
+*{
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
 }
 
+.form-button{
+  width:40px;
+  height:40px;
+  padding:10px;
+  color:pink;
+}
+
+.form-text-input{
+    width:300px;
+    height:40px;
+    border-radius:15px;
+    border:2px solid black;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

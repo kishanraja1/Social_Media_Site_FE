@@ -1,13 +1,15 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react'
 import './App.css';
+import Button from '@mui/material/Button';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import EditModal from './components/EditModal'
 
 // REMEMBER YOU NEED TO HAVE .REVERSE() IN EACH AXIOS.GET OR ELSE THE DATA
 // WILL WONT BE REVERSED FOR A RANDOM BUTTON 
 function App() {
 
-  // temporary data bc i cannot get the get bc of cors.
+//  form and list of all posts states
   const [allPosts, setAllPosts] = useState([])
   const [ name, setName] = useState('')
   const [ newPost, setNewPost] = useState('')
@@ -70,18 +72,12 @@ function App() {
       {/* for name of poster. for now it will be static */}
       {/* Name: <input defaultValue={""} />
       <br></br> */}
-      Post: <input 
-      style={
-      {width:"300px",
-      height:"40px",
-      borderRadius:"15px",
-      border:"2px solid black"}} 
-      required onChange={commentText} />
+      Post: <input  className={'form-text-input'} required onChange={commentText} />
       <br></br>
-      <input type={'submit'}/>
-
+      <Button type={'submit'} variant="contained" color="success">
+                Submit
+      </Button>
     </form>
-    
     
     <div>
       <ul>
@@ -94,9 +90,12 @@ function App() {
                 <div className='postDiv'>
                 {post.post} 
                 <br/>
-                <button onClick={(event) => {
-                      handleDelete(post)
-                }}>Delete</button>
+                <Button className={"form-button"} variant="contained" color={'error'}
+                onClick={(event) => {
+                  handleDelete(post)
+                }}>
+                  Delete
+                </Button>
                 <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
                   getPosts()
                 } } />

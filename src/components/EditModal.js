@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
-import {useState} from 'react'
+import {useState} from 'react';
 
 // SHOW ASHLEY. Think its line one. causing this warning. it is yellow.
 // react_devtools_backend.js:4061 You are loading @emotion/react when it is already loaded.
@@ -70,7 +70,7 @@ const EditModal = (props) => {
     return(
     <>
     {/* button to open Modal. A form inside to update posts. */}
-    <Button onClick={handleOpen}>Edit Page</Button>
+    <Button className={"form-button"} variant='contained' onClick={handleOpen}>Edit </Button>
         <Modal
             open={open}
             onClose={handleClose}
@@ -84,7 +84,11 @@ const EditModal = (props) => {
                 Poster: Add prop later
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-               <input defaultValue={props.content} onChange={ChangeContentState}/>
+               <input className={'form-text-input'} defaultValue={props.content} onChange={ChangeContentState}/>
+               <br/>
+               <Button type={'submit'} variant="contained" color="success">
+                Submit
+                </Button>
             </Typography>
                 </form>
             </Box>
