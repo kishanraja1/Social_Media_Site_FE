@@ -1,18 +1,24 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react'
 import './App.css';
+import EditModal from './components/EditModal'
 
+// REMEMBER YOU NEED TO HAVE .REVERSE() IN EACH AXIOS.GET OR ELSE THE DATA
+// WILL WONT BE REVERSED FOR A RANDOM BUTTON 
 function App() {
+
   // temporary data bc i cannot get the get bc of cors.
   const [allPosts, setAllPosts] = useState([])
   const [ name, setName] = useState('')
   const [ newPost, setNewPost] = useState('')
 
-  // const getPosts = () => {
-  //   axios.get('localhost:3000').then((res) => {
-  //     console.log(res.data)
-  //   })
-  // }
+
+  const getPosts = () => {
+    axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
+      setAllPosts(res.data.reverse())
+      // console.log(res.data)
+    }) 
+  }
 
   // for posting the new post
   const newPostSubmitHandler =  (event) => {
@@ -24,10 +30,11 @@ function App() {
         .then(() => {
           axios.get('https://stormy-springs-28465.herokuapp.com/posts')
             .then((res) =>{
-              setAllPosts(res.data) 
+              setAllPosts(res.data.reverse()) 
       })
     }) 
   }
+
  // update state for the comment
  const commentText = (event) => {
   //  console.log(event.target.value)
@@ -42,17 +49,16 @@ function App() {
             axios
                 .get('https://stormy-springs-28465.herokuapp.com/posts')
                 .then((response)=>{
-                    setAllPosts(response.data)
+                    setAllPosts(response.data.reverse())
                 })
         })
   }
 
   // what starts on page load
   useEffect(() => {
-    axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
-      setAllPosts(res.data)
-      console.log(res.data)
-    }) 
+    getPosts()
+      // console.log(res.data)
+   
   },[])
 
   return (
@@ -64,29 +70,42 @@ function App() {
       {/* for name of poster. for now it will be static */}
       {/* Name: <input defaultValue={""} />
       <br></br> */}
-      Post: <textarea required onChange={commentText} />
+      Post: <input 
+      style={
+      {width:"300px",
+      height:"40px",
+      borderRadius:"15px",
+      border:"2px solid black"}} 
+      required onChange={commentText} />
       <br></br>
       <input type={'submit'}/>
 
     </form>
+    
+    
     <div>
       <ul>
         { 
-        allPosts.map((post) => {
-           
-          return (
-            <>
-            <li key={post._id}>{post.post} 
-            <br/>
-            <button onClick={(event) => {
-                  handleDelete(post)
-            }}>Delete</button>
-            </li>
-
-            </>
-          )
+          allPosts.map((post) => {
+            
+            return (
+            //  outter most container/ element must have a key
+              <li key={post._id}>
+                <div className='postDiv'>
+                {post.post} 
+                <br/>
+                <button onClick={(event) => {
+                      handleDelete(post)
+                }}>Delete</button>
+                <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
+                  getPosts()
+                } } />
+                </div>
+              </li>
+              // because react sucks
+              // because react sucks
+            )
         })
-      
       }
       </ul>
     </div>
