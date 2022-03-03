@@ -15,7 +15,7 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
             axios.post(
-              'http://localhost:3000/users',{
+              'https://stormy-springs-28465.herokuapp.com/users',{
                 username: user,
                 password: pwd
               }
