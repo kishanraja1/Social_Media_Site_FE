@@ -4,11 +4,11 @@ import './App.css';
 import Button from '@mui/material/Button';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import EditModal from './components/EditModal'
-import Register from './components/Register'
+import Auth from './components/Auth'
 
 
 // REMEMBER YOU NEED TO HAVE .REVERSE() IN EACH AXIOS.GET OR ELSE THE DATA
-// WILL WONT BE REVERSED FOR A RANDOM BUTTON 
+// WILL WONT BE REVERSED FOR A RANDOM BUTTON
 function App() {
 
 //  form and list of all posts states
@@ -21,7 +21,7 @@ function App() {
     axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
       setAllPosts(res.data.reverse())
       // console.log(res.data)
-    }) 
+    })
   }
 
   // for posting the new post
@@ -34,7 +34,7 @@ function App() {
         .then(() => {
           axios.get('https://stormy-springs-28465.herokuapp.com/posts')
             .then((res) =>{
-              setAllPosts(res.data.reverse()) 
+              setAllPosts(res.data.reverse())
       })
     })
   }
@@ -66,7 +66,7 @@ function App() {
 
   return (
     <>
-    <Register setAllPosts={setAllPosts}/>
+    <Auth />
     <h1>Hi</h1>
     <form onSubmit={(event) => {
       newPostSubmitHandler(event)
@@ -80,7 +80,7 @@ function App() {
                 Submit
       </Button>
     </form>
-    
+
     <div>
       <ul>
         {
