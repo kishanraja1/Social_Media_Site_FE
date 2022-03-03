@@ -20,7 +20,9 @@ const LikesAndDislikes = (props) => {
             axios.put(
                     `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
                     likes: like+1,
-                    dislikes:dislike-1
+                    dislikes:dislike-1,
+                    dislikeBoolean:false,
+                    likeBoolean:true
                     }).then(() => {
                         console.log('in axios');
                         props.getPostsFunction() 
@@ -32,6 +34,7 @@ const LikesAndDislikes = (props) => {
                     axios.put(
                             `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
                             likes: like+1,
+                            likeBoolean:true
                     }).then(() => {
                         props.getPostsFunction()
                     }) 
@@ -52,25 +55,25 @@ const LikesAndDislikes = (props) => {
             axios.put(
                     `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
                     likes: like-1,
-                    dislikes:dislike+1
+                    dislikes:dislike+1,
+                    dislikeBoolean:true,
+                    likeBoolean:false
                     }).then(() => {
                         props.getPostsFunction() 
                     })
                      
         } 
         else if(!likeBoolean){
-            console.log('stupid ');
-            console.log('hit main,');
             setDislikeBoolean(true)
             setDislike(prevDislike => prevDislike +1 )
             
             axios.put(
                     `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
                     dislikes:dislike+1,
-                    // likes:like-1
+                    dislikeBoolean:true
+
             }).then(() => {
                 props.getPostsFunction()
-                console.log('in !dislikeBoolean');
             })
         }  
     }
