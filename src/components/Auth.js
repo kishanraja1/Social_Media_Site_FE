@@ -19,7 +19,7 @@ const Auth = () => {
     event.preventDefault()
     setUsername('')
     setPassword('')
-    axios.post('http://localhost:3000/users/createaccount',
+    axios.post('https://stormy-springs-28465.herokuapp.com/users/createaccount',
     {
       username: username,
       password: password
@@ -45,7 +45,7 @@ const Auth = () => {
     event.preventDefault()
     setUsername('')
     setPassword('')
-    axios.put('http://localhost:3000/users/login',
+    axios.put('https://stormy-springs-28465.herokuapp.com/users/login',
     {
       username: username,
       password: password
