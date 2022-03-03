@@ -4,6 +4,8 @@ import './App.css';
 import Button from '@mui/material/Button';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import EditModal from './components/EditModal'
+import Register from './components/Register'
+
 
 // REMEMBER YOU NEED TO HAVE .REVERSE() IN EACH AXIOS.GET OR ELSE THE DATA
 // WILL WONT BE REVERSED FOR A RANDOM BUTTON 
@@ -34,7 +36,7 @@ function App() {
             .then((res) =>{
               setAllPosts(res.data.reverse()) 
       })
-    }) 
+    })
   }
 
  // update state for the comment
@@ -59,12 +61,12 @@ function App() {
   // what starts on page load
   useEffect(() => {
     getPosts()
-      // console.log(res.data)
-   
+
   },[])
 
   return (
     <>
+    <Register setAllPosts={setAllPosts}/>
     <h1>Hi</h1>
     <form onSubmit={(event) => {
       newPostSubmitHandler(event)
@@ -81,6 +83,7 @@ function App() {
     
     <div>
       <ul>
+
         { 
           allPosts.map((post) => {
             
@@ -92,6 +95,16 @@ function App() {
                 <br/>
                 <Button className={"form-button"} variant="contained" color={'error'}
                 onClick={(event) => {
+
+        {
+        allPosts.map((post) => {
+
+          return (
+            <>
+            <li key={post._id}>{post.post}
+            <br/>
+            <button onClick={(event) => {
+
                   handleDelete(post)
                 }}>
                   Delete
@@ -117,9 +130,9 @@ export default App;
 
 // edit
 // either make a new page or make modal
-// fill with post name data. 
-// MODAL: use lightbox logic to click out of it? 
+// fill with post name data.
+// MODAL: use lightbox logic to click out of it?
 // MUI framework instead
-//  
-// 
-// 
+//
+//
+//
