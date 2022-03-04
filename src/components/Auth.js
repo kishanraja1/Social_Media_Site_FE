@@ -1,9 +1,11 @@
 //used single component auth markdown to achieve
 import React, { useState } from 'react'
 import axios from 'axios'
+import AllPosts from './AllPosts'
+import MakePost from './MakePost'
 
 
-const Auth = () => {
+const Auth = (props) => {
   const [toggleLogin, setToggleLogin] = useState(true)
   const [toggleError, setToggleError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -133,7 +135,10 @@ const Auth = () => {
       </div>
       {currentUser.username ?
         <div>
-          <h1>Hello, {currentUser.username}, This entire div will only show if a user is currently logged in</h1>
+          <h1>Hello, {currentUser.username}, </h1>
+          <MakePost allPosts={props.allPosts} setAllPosts={props.setAllPosts} />
+          <br/>
+          <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts}/>
         </div>
         :
         null
