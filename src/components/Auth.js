@@ -14,6 +14,7 @@ const Auth = (props) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [userObj, setUserObj] = useState()
 
 
 //sets username and password to blank and then posts usernam and pwd to db.
@@ -45,8 +46,6 @@ const Auth = (props) => {
 //find username and pwd in in data base. functions on backend will send responses for any errors.
   const handleLogin = (event) => {
     event.preventDefault()
-    setUsername('')
-    setPassword('')
     axios.put('https://stormy-springs-28465.herokuapp.com/users/login',
     {
       username: username,
@@ -62,11 +61,18 @@ const Auth = (props) => {
         setToggleError(true)
         setErrorMessage(response.data)
       }
+    }).then(() => {
+      axios.get(`http://localhost:3000/users/findOne/${username}`,
+    ).then((res) => {
+      setUserObj(res.data)
+    })
     })
   }
 
 // changes state of user to empty.
   const handleLogout = () => {
+    setUsername('')
+    setPassword('')
     setCurrentUser({})
     handleToggleLogout()
   }
@@ -90,9 +96,18 @@ const Auth = (props) => {
     }
   }
 
+  const tempFunction = () => {
+    // console.log('here');
+    axios.get(`http://localhost:3000/users/findOne/${username}`,
+    ).then((res) => {
+      console.log(res.data)
+    })
+  }
+
   return (
     <div>
       <div>
+        <button onClick={tempFunction}> click for call</button>
         {toggleLogout ?
           <button onClick={handleLogout}>Logout</button> :
           <div>
@@ -136,9 +151,9 @@ const Auth = (props) => {
       {currentUser.username ?
         <div>
           <h1>Hello, {currentUser.username}, </h1>
-          <MakePost allPosts={props.allPosts} setAllPosts={props.setAllPosts} />
+          <MakePost allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
           <br/>
-          <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts}/>
+          <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} username={username}/>
         </div>
         :
         null
