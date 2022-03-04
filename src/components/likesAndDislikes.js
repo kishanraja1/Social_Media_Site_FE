@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import axios from 'axios'
+
+
 const LikesAndDislikes = (props) => {
     // fucntion for likes and dislikes. resets the like and dislike.
     // makes api call
@@ -24,9 +26,9 @@ const LikesAndDislikes = (props) => {
                     dislikeBoolean:false,
                     likeBoolean:true
                     }).then(() => {
-                        props.getPostsFunction() 
-                    })      
-             } 
+                        props.getPostsFunction()
+                    })
+             }
              else if(!dislikeBoolean ){
                 setLikeBoolean( prevBool => true)
                 setLike(prevLike => prevLike +1 )
@@ -36,9 +38,9 @@ const LikesAndDislikes = (props) => {
                             likeBoolean:true
                     }).then(() => {
                         props.getPostsFunction()
-                    }) 
+                    })
                 }
-            
+
     }
 
 
@@ -49,7 +51,7 @@ const LikesAndDislikes = (props) => {
             setLikeBoolean(prevBool => false)
             setLike(prevLike => prevLike -1)
             setDislike(prevDislike => prevDislike +1 )
-           
+
             axios.put(
                     `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
                     likes: like-1,
@@ -57,14 +59,14 @@ const LikesAndDislikes = (props) => {
                     dislikeBoolean:true,
                     likeBoolean:false
                     }).then(() => {
-                        props.getPostsFunction() 
+                        props.getPostsFunction()
                     })
-                     
-        } 
+
+        }
         else if(!likeBoolean){
             setDislikeBoolean(true)
             setDislike(prevDislike => prevDislike +1 )
-            
+
             axios.put(
                     `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
                     dislikes:dislike+1,
@@ -73,12 +75,12 @@ const LikesAndDislikes = (props) => {
             }).then(() => {
                 props.getPostsFunction()
             })
-        }  
+        }
     }
     return(
         <>
-            <div onClick={addLike}> Like: {like}</div>
-            <div onClick={addDislike}> Dislike: {dislike}</div>
+            <button onClick={addLike}> Like </button>{like}<br/>
+            <button onClick={addDislike}> Dislike </button>{dislike}
         </>
     )
 }
