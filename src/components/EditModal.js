@@ -39,9 +39,12 @@ const EditModal = (props) => {
         event.preventDefault()
         // put inital state to '' and run this logic again to show
 
+        // wont setContentState won't update on the
+        //  first run but will subsequently
         // if(contentState === ''){
         //     console.log('true')
         //     console.log(props.content)
+        //     // think as async event. takes time to do.
         //     setContentState(props.content)
         // } else{
         //     console.log('guess not')
@@ -55,7 +58,6 @@ const EditModal = (props) => {
 
       handleClose()
       props.getPostsFunction()
-      
     //   console.log('hi from edit Modal')
     //   console.log(getData.data)
       
