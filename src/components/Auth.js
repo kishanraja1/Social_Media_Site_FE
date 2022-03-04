@@ -62,7 +62,7 @@ const Auth = (props) => {
         setErrorMessage(response.data)
       }
     }).then(() => {
-      axios.get(`http://localhost:3000/users/findOne/${username}`,
+      axios.get(`https://stormy-springs-28465.herokuapp.com/users/findOne/${username}`,
     ).then((res) => {
       setUserObj(res.data)
     })
@@ -96,18 +96,10 @@ const Auth = (props) => {
     }
   }
 
-  const tempFunction = () => {
-    // console.log('here');
-    axios.get(`http://localhost:3000/users/findOne/${username}`,
-    ).then((res) => {
-      console.log(res.data)
-    })
-  }
-
+  
   return (
     <div>
       <div>
-        <button onClick={tempFunction}> click for call</button>
         {toggleLogout ?
           <button onClick={handleLogout}>Logout</button> :
           <div>
