@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import AllPosts from './AllPosts'
 import MakePost from './MakePost'
+import Button from 'react-bootstrap/Button';
 
+import '../App.css';
 
 const Auth = (props) => {
   const [toggleLogin, setToggleLogin] = useState(true)
@@ -62,7 +64,7 @@ const Auth = (props) => {
         setErrorMessage(response.data)
       }
     }).then(() => {
-      axios.get(`http://localhost:3000/users/findOne/${username}`,
+      axios.get(`https://stormy-springs-28465.herokuapp.com/users/findOne/${username}`,
     ).then((res) => {
       setUserObj(res.data)
     })
@@ -96,49 +98,41 @@ const Auth = (props) => {
     }
   }
 
-  const tempFunction = () => {
-    // console.log('here');
-    axios.get(`http://localhost:3000/users/findOne/${username}`,
-    ).then((res) => {
-      console.log(res.data)
-    })
-  }
 
   return (
     <div>
       <div>
-        <button onClick={tempFunction}> click for call</button>
         {toggleLogout ?
-          <button onClick={handleLogout}>Logout</button> :
+          <button className='logout' onClick={handleLogout}>Logout</button> :
           <div>
             {toggleLogin ?
               //login form
               <div>
-                <h1>Login</h1>
+                <h3>Please Login Below</h3>
                 <form onSubmit={handleLogin}>
-                  <input type='text' placeholder='username' onChange={(event)=> {setUsername(event.target.value)}}/>
-                  <input type='password' placeholder='password' onChange={(event)=> {setPassword(event.target.value)}}/>
+                  <input type='text' placeholder='username' onChange={(event)=> {setUsername(event.target.value)}}/><br/>
+                  <input type='password' placeholder='password' onChange={(event)=> {setPassword(event.target.value)}}/><br/>
                   {toggleError ?
                     <h5>{errorMessage}</h5>
                     :
                     null
                   }
-                  <input type='submit' value='Login'/>
+                  <input className='formButton' type='submit' value='Login'/>
                 </form>
               </div>
             :
             // new user form
             <div>
-              <h1>Create an Account</h1>
+              <h3>Create an Account</h3>
               <form onSubmit={handleCreateUser}>
-                <input type='text' placeholder='username' onChange={(event)=> {setUsername(event.target.value)}}/>
-                <input type='password' placeholder='password' onChange={(event)=> {setPassword(event.target.value)}}/>
+                <input type='text' placeholder='username' onChange={(event)=> {setUsername(event.target.value)}}/><br/>
+                <input type='password' placeholder='password' onChange={(event)=> {setPassword(event.target.value)}}/><br/>
                 {toggleError ?
                   <h5>{errorMessage}</h5>
                   :
                   null
                 }
-                <input type='submit' value='Register'/>
+                <input className='formButton' type='submit' value='Register'/>
               </form>
             </div>
             }
@@ -150,7 +144,7 @@ const Auth = (props) => {
       </div>
       {currentUser.username ?
         <div>
-          <h1>Hello, {currentUser.username}, </h1>
+          <h3>Welcome back {currentUser.username}, </h3>
           <MakePost allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
           <br/>
           <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} username={username}/>
