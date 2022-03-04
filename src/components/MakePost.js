@@ -7,7 +7,7 @@ import {useState} from 'react'
 const MakePost = (props) => {
     const [ newPost, setNewPost] = useState('')
 
-
+    
      // for posting the new post
     const newPostSubmitHandler =  (event) => {
         event.preventDefault();
