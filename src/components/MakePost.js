@@ -3,9 +3,9 @@ import axios from 'axios';
 import {useState} from 'react'
 
 
-
 const MakePost = (props) => {
     const [ newPost, setNewPost] = useState('')
+   
 
      // for posting the new post
     const newPostSubmitHandler =  (event) => {
@@ -17,7 +17,7 @@ const MakePost = (props) => {
             dislikes:0,
             likeBoolean:false,
             dislikeBoolean:false,
-            // author: "622155e2385f63508588e9a0"
+            author: props.userObj._id
             })
             .then(() => {
               axios.get('https://stormy-springs-28465.herokuapp.com/posts')
@@ -37,9 +37,9 @@ return(
     <form onSubmit={(event) => {
         newPostSubmitHandler(event)
       }}>
-        {/* for name of poster. for now it will be static */}
-        {/* Name: <input defaultValue={""} />
-        <br></br> */}
+        {props.userObj?.username}
+        
+        <br></br>
         Post: <input  className={'form-text-input'} required onChange={commentText} />
         <br></br>
         <Button type={'submit'} variant="contained" color="success">

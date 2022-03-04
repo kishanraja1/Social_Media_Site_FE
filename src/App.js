@@ -14,7 +14,7 @@ function App() {
 
 //  form and list of all posts states
   const [allPosts, setAllPosts] = useState([])
-  const [ name, setName] = useState('')
+  
   
 
   return (
