@@ -24,7 +24,6 @@ const LikesAndDislikes = (props) => {
                     dislikeBoolean:false,
                     likeBoolean:true
                     }).then(() => {
-                        console.log('in axios');
                         props.getPostsFunction() 
                     })      
              } 
@@ -44,7 +43,6 @@ const LikesAndDislikes = (props) => {
 
 
    const addDislike = () => {
-        // console.log("hi");
         if(dislikeBoolean){
         }else if(likeBoolean){
             setDislikeBoolean(prevBool => true)
