@@ -44,14 +44,18 @@ return(
           return (
             <li key={post._id}>{post.post}
             <br/>
-            <Button color={'error'} variant={'contained'}onClick={(event) => {
-                  handleDelete(post)
-                }}>
-                  Delete
-                </Button>
-                <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
-                  getPosts()
-                } } />
+
+            {/* checks if current user made the post.*/}
+            {props.userObj?._id != post.author ?
+                "": <div> <Button color={'error'} variant={'contained'}onClick={(event) => {
+                    handleDelete(post)
+                  }}>
+                    Delete
+                  </Button>
+                  <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
+                    getPosts()
+                  } } /> </div> }
+
                 <LikesAndDislikes allProps={post} likes={post.likes} 
                 dislikes={post.dislikes} id={post._id} likeBoolean={post.likeBoolean} dislikeBoolean={post.dislikeBoolean}
                  getPostsFunction={ () => {
