@@ -43,7 +43,7 @@ return(
         <br></br>
         Post: <input  className={'form-text-input'} placeholder="What's New?" required onChange={commentText} />
         <br></br>
-        <Button>
+        <Button type='submit'>
                   Create This Post
         </Button>
       </form>
