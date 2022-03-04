@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
@@ -32,7 +32,7 @@ const EditModal = (props) => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-    }; 
+    };
 
     // Submit the edit form
     const submitEdit = async (event) => {
@@ -49,7 +49,7 @@ const EditModal = (props) => {
         // } else{
         //     console.log('guess not')
         // }
-        // contentState == '' ? setContentState(props.content) : '' 
+        // contentState == '' ? setContentState(props.content) : ''
         // !!!!!!!!!!!! ADD MORE TO THE OBJECT SCHEMA.
       const getData =  await axios.put(`https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,
       {
@@ -60,7 +60,7 @@ const EditModal = (props) => {
       props.getPostsFunction()
     //   console.log('hi from edit Modal')
     //   console.log(getData.data)
-      
+
     }
 
     // update state for form inputs
@@ -72,7 +72,7 @@ const EditModal = (props) => {
     return(
     <>
     {/* button to open Modal. A form inside to update posts. */}
-    <Button className={"form-button"} variant='contained' onClick={handleOpen}>Edit </Button>
+    <Button onClick={handleOpen}>Edit </Button>
         <Modal
             open={open}
             onClose={handleClose}

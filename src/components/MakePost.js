@@ -1,11 +1,12 @@
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import {useState} from 'react'
 
 
 const MakePost = (props) => {
     const [ newPost, setNewPost] = useState('')
-   
+
 
      // for posting the new post
     const newPostSubmitHandler =  (event) => {
@@ -38,12 +39,12 @@ return(
         newPostSubmitHandler(event)
       }}>
         {props.userObj?.username}
-        
+
         <br></br>
-        Post: <input  className={'form-text-input'} required onChange={commentText} />
+        Post: <input  className={'form-text-input'} placeholder="What's New?" required onChange={commentText} />
         <br></br>
-        <Button type={'submit'} variant="contained" color="success">
-                  Submit
+        <Button>
+                  Create This Post
         </Button>
       </form>
       )
