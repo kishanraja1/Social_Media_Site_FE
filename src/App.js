@@ -4,6 +4,7 @@ import Auth from './components/Auth'
 import AllPosts from './components/AllPosts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { BiLike } from 'react-icons/bi'
 
 
 import './App.css';
