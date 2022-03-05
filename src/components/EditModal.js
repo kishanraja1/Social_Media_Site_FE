@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
 import {useState} from 'react';
+import { AiFillEdit } from "react-icons/ai"
 
 // SHOW ASHLEY. Think its line one. causing this warning. it is yellow.
 // react_devtools_backend.js:4061 You are loading @emotion/react when it is already loaded.
@@ -72,7 +73,7 @@ const EditModal = (props) => {
     return(
     <>
     {/* button to open Modal. A form inside to update posts. */}
-    <Button onClick={handleOpen}>Edit </Button>
+    <Button onClick={handleOpen}> <AiFillEdit /> </Button>
         <Modal
             open={open}
             onClose={handleClose}
@@ -83,7 +84,7 @@ const EditModal = (props) => {
                 <form onSubmit={submitEdit}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
                 {/* Poster:<input /> */}
-                Poster: Add prop later
+                Edit your post
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                <input className={'form-text-input'} defaultValue={props.content} onChange={ChangeContentState}/>
