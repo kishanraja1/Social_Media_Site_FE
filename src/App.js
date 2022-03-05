@@ -1,7 +1,5 @@
-import axios from 'axios';
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Auth from './components/Auth'
-import AllPosts from './components/AllPosts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 

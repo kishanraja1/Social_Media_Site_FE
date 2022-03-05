@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios'
+import { BiLike, BiDislike } from 'react-icons/bi'
 
 
 const LikesAndDislikes = (props) => {
@@ -79,8 +80,8 @@ const LikesAndDislikes = (props) => {
     }
     return(
         <>
-            <button onClick={addLike}> Like </button>{like}<br/>
-            <button onClick={addDislike}> Dislike </button>{dislike}
+            <button onClick={addLike}> <BiLike /> </button>{like}<br/>
+            <button onClick={addDislike}> <BiDislike /> </button>{dislike}
         </>
     )
 }

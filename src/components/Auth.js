@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import AllPosts from './AllPosts'
 import MakePost from './MakePost'
-import Button from 'react-bootstrap/Button';
 
 import '../App.css';
 
@@ -18,6 +17,8 @@ const Auth = (props) => {
   const [password, setPassword] = useState('')
   const [userObj, setUserObj] = useState()
 
+///used markdown for singlecomponent auth to complete this:
+//https://git.generalassemb.ly/Software-Engineering-Immersive-Remote/SEIR-Toph/tree/master/projects/project_3/unit-3-auth-single-component
 
 //sets username and password to blank and then posts usernam and pwd to db.
   const handleCreateUser = (event) => {
@@ -80,8 +81,11 @@ const Auth = (props) => {
   }
 
 //toggle button to show need an account or already have an account
-  const handleToggleForm = () => {
+  const handleToggleForm = (event) => {
     setToggleError(false)
+    // setUsername(event.target.value)
+    // setPassword(event.target.value)
+    // setCurrentUser(event.target.value)
     if(toggleLogin === true) {
       setToggleLogin(false)
     } else {
@@ -97,6 +101,10 @@ const Auth = (props) => {
       setToggleLogout(true)
     }
   }
+
+  // const refreshPage = () => {
+  //   window.location.reload(false)
+  // }
 
 
   return (
