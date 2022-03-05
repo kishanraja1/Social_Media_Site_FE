@@ -4,7 +4,10 @@ import LikesAndDislikes from './likesAndDislikes'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
+import { AiFillDelete } from "react-icons/ai"
+
+
 // import DeleteIcon from '@mui/icons-material/Delete';
 
 import '../App.css';
@@ -37,8 +40,7 @@ const AllPosts = (props) => {
   // what starts on page load
   useEffect(() => {
     getPosts()
-
-  },[])
+  })
 
 return(
   <div className='postsContainer'>
@@ -49,17 +51,18 @@ return(
 
               <Card className='posts' key={post._id} style={{ width: '18rem' }}>
               <Card.Body>
-                <Card.Title>name of author?</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Time-stamp?</Card.Subtitle>
+                <Card.Title>Name</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">{post.author}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">{post.createdAt}</Card.Subtitle>
                 <Card.Text>
                   {post.post}
                 </Card.Text>
 
-                {props.userObj?._id != post.author ?
+                {props.userObj?._id !== post.author ?
                     "": <div> <Button onClick={(event) => {
                         handleDelete(post)
                       }}>
-                        Delete
+                        <AiFillDelete />
                       </Button>
 
                       <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
