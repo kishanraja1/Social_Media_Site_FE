@@ -18,7 +18,8 @@ const MakePost = (props) => {
             dislikes:0,
             likeBoolean:false,
             dislikeBoolean:false,
-            author: props.userObj._id
+            author: props.userObj._id,
+            name: props.username
             })
             .then(() => {
               axios.get('https://stormy-springs-28465.herokuapp.com/posts')
