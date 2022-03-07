@@ -15,15 +15,12 @@ import '../App.css';
 
 const AllPosts = (props) => {
 
-
-
     const getPosts = () => {
         axios.get('https://stormy-springs-28465.herokuapp.com/posts').then((res) => {
           props.setAllPosts(res.data.reverse())
           // console.log(res.data)
         })
       }
-
 
       // delete the post
   const handleDelete = (p)=>{
@@ -72,8 +69,9 @@ return(
                       </div> }
               </Card.Body>
               <LikesAndDislikes allProps={post} likes={post.likes}
-                              dislikes={post.dislikes} id={post._id} likeBoolean={post.likeBoolean} dislikeBoolean={post.dislikeBoolean}
-                               getPostsFunction={ () => {
+                              dislikes={post.dislikes} postID={post._id} forLike={props.forLike} userID={props.userObj}
+                              
+                              getPostsFunction={ () => {
                                 getPosts()
                               } }/>
             </Card>

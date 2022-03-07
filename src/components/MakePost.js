@@ -4,9 +4,9 @@ import axios from 'axios';
 import {useState} from 'react'
 
 
+
 const MakePost = (props) => {
     const [ newPost, setNewPost] = useState('')
-
 
      // for posting the new post
     const newPostSubmitHandler =  (event) => {
@@ -19,6 +19,7 @@ const MakePost = (props) => {
             likeBoolean:false,
             dislikeBoolean:false,
             author: props.userObj._id,
+            react:{},
             name: props.username
             })
             .then(() => {
@@ -39,7 +40,6 @@ return(
     <form onSubmit={(event) => {
         newPostSubmitHandler(event)
       }}>
-        {props.userObj?.username}
 
         <br></br>
         Post: <input  className={'form-text-input'} placeholder="What's New?" required onChange={commentText} />

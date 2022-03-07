@@ -16,6 +16,9 @@ const Auth = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [userObj, setUserObj] = useState()
+  const [forLike, setForLike ] =useState()
+  // for the user ID
+  let cheat = {}
 
 ///used markdown for singlecomponent auth to complete this:
 //https://git.generalassemb.ly/Software-Engineering-Immersive-Remote/SEIR-Toph/tree/master/projects/project_3/unit-3-auth-single-component
@@ -25,6 +28,7 @@ const Auth = (props) => {
     event.preventDefault()
     setUsername('')
     setPassword('')
+    
     axios.post('https://stormy-springs-28465.herokuapp.com/users/createaccount',
     {
       username: username,
@@ -37,11 +41,17 @@ const Auth = (props) => {
         setErrorMessage('')
         setCurrentUser(response.data)
         handleToggleLogout()
+        cheat = response.data
+        // console.log(cheat)
         //post errors, if any
       } else {
         setErrorMessage(response.data)
         setToggleError(true)
       }
+    }).then(() => {
+      axios.get(`https://stormy-springs-28465.herokuapp.com/likes/default/${cheat._id}`).then(() => {
+        // console.log(cheat)
+      })
     })
   }
 
@@ -68,6 +78,12 @@ const Auth = (props) => {
       axios.get(`https://stormy-springs-28465.herokuapp.com/users/findOne/${username}`,
     ).then((res) => {
       setUserObj(res.data)
+      
+      axios.get(`https://stormy-springs-28465.herokuapp.com/likes/default/${res.data._id}`).then((reply) => {
+        console.log(reply)
+      })
+      
+      // console.log(res.data);
     })
     })
   }
@@ -155,7 +171,7 @@ const Auth = (props) => {
           <h3>Welcome back {currentUser.username}, </h3>
           <MakePost username={currentUser.username} allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
           <br/>
-          <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} username={username}/>
+          <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts} forLike={forLike} userObj={userObj}  username={username}/>
         </div>
         :
         null
