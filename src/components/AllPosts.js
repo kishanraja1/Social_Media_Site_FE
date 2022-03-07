@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import {useEffect} from 'react'
 import { AiFillDelete } from "react-icons/ai"
+import moment from 'moment'
 
 
 // import DeleteIcon from '@mui/icons-material/Delete';
@@ -51,9 +52,8 @@ return(
 
               <Card className='posts' key={post._id} style={{ width: '18rem' }}>
               <Card.Body>
-                <Card.Title>Name</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{post.author}</Card.Subtitle>
-                <Card.Subtitle className="mb-2 text-muted">{post.createdAt}</Card.Subtitle>
+                <Card.Title>{post.name}</Card.Title>
+                <Card.Subtitle className="cardSub mb-2 text-muted">{moment(post.date).format('MM-DD-YYYY')}</Card.Subtitle>
                 <Card.Text>
                   {post.post}
                 </Card.Text>
@@ -88,34 +88,3 @@ return(
 }
 
 export default AllPosts
-
-
-// <ul>
-//         {
-//         props.allPosts.map((post) => {
-//
-//           return (
-//             <li key={post._id}>{post.post}
-//             <br/>
-//
-//             {/* checks if current user made the post.*/}
-            // {props.userObj?._id != post.author ?
-            //     "": <div> <Button color={'error'} variant={'contained'}onClick={(event) => {
-            //         handleDelete(post)
-            //       }}>
-            //         Delete
-            //       </Button>
-            //       <EditModal content={post.post} id={post._id} getPostsFunction={ () => {
-            //         getPosts()
-            //       } } /> </div> }
-//
-//                 <LikesAndDislikes allProps={post} likes={post.likes}
-//                 dislikes={post.dislikes} id={post._id} likeBoolean={post.likeBoolean} dislikeBoolean={post.dislikeBoolean}
-//                  getPostsFunction={ () => {
-//                   getPosts()
-//                 } }/>
-//               </li>
-//             )
-//         })
-//       }
-//       </ul>

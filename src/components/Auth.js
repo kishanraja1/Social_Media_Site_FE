@@ -153,7 +153,7 @@ const Auth = (props) => {
       {currentUser.username ?
         <div>
           <h3>Welcome back {currentUser.username}, </h3>
-          <MakePost allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
+          <MakePost username={currentUser.username} allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
           <br/>
           <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} username={username}/>
         </div>
