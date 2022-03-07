@@ -49,7 +49,7 @@ const Auth = (props) => {
         setToggleError(true)
       }
     }).then(() => {
-      axios.get(`http://localhost:3000/likes/default/${cheat._id}`).then(() => {
+      axios.get(`https://stormy-springs-28465.herokuapp.com/likes/default/${cheat._id}`).then(() => {
         // console.log(cheat)
       })
     })
@@ -79,7 +79,7 @@ const Auth = (props) => {
     ).then((res) => {
       setUserObj(res.data)
       
-      axios.get(`http://localhost:3000/likes/default/${res.data._id}`).then((reply) => {
+      axios.get(`https://stormy-springs-28465.herokuapp.com/likes/default/${res.data._id}`).then((reply) => {
         console.log(reply)
       })
       
@@ -169,7 +169,7 @@ const Auth = (props) => {
       {currentUser.username ?
         <div>
           <h3>Welcome back {currentUser.username}, </h3>
-          <MakePost allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
+          <MakePost username={currentUser.username} allPosts={props.allPosts} setAllPosts={props.setAllPosts} userObj={userObj} />
           <br/>
           <AllPosts allPosts={props.allPosts} setAllPosts={props.setAllPosts} forLike={forLike} userObj={userObj}  username={username}/>
         </div>

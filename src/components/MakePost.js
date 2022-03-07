@@ -8,7 +8,6 @@ import {useState} from 'react'
 const MakePost = (props) => {
     const [ newPost, setNewPost] = useState('')
 
-
      // for posting the new post
     const newPostSubmitHandler =  (event) => {
         event.preventDefault();
@@ -20,7 +19,8 @@ const MakePost = (props) => {
             likeBoolean:false,
             dislikeBoolean:false,
             author: props.userObj._id,
-            react:{}
+            react:{},
+            name: props.username
             })
             .then(() => {
               axios.get('https://stormy-springs-28465.herokuapp.com/posts')

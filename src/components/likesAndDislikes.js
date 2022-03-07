@@ -12,7 +12,7 @@ const LikesAndDislikes = (props) => {
 
     const addLike = async () => {
     
-      let likedObject = await axios.put(`http://localhost:3000/likes/${props.userID._id}/${props.postID}`)
+      let likedObject = await axios.put(`https://stormy-springs-28465.herokuapp.com/likes/${props.userID._id}/${props.postID}`)
 
       setLike(likedObject.data.likes)
       setDislike(likedObject.data.dislikes)
@@ -32,7 +32,7 @@ const LikesAndDislikes = (props) => {
    const addDislike = async () => {
 
 
-    let likedObject = await axios.put(`http://localhost:3000/likes/${props.userID._id}/${props.postID}/dislike`)
+    let likedObject = await axios.put(`https://stormy-springs-28465.herokuapp.com/likes/${props.userID._id}/${props.postID}/dislike`)
 
     setLike(likedObject.data.likes)
     setDislike(likedObject.data.dislikes)
@@ -44,37 +44,6 @@ const LikesAndDislikes = (props) => {
     // console.log(likedObject)
 
     props.getPostsFunction()
-    // if(dislikeBoolean){
-    // }else if(likeBoolean){
-    //     setDislikeBoolean(prevBool => true)
-    //     setLikeBoolean(prevBool => false)
-    //     setLike(prevLike => prevLike -1)
-    //     setDislike(prevDislike => prevDislike +1 )
-
-    //     axios.put(
-    //             `https://stormy-springs-28465.herokuapp.com/posts/${props.postID}`,{
-    //             likes: like-1,
-    //             dislikes:dislike+1,
-    //             dislikeBoolean:true,
-    //             likeBoolean:false
-    //             }).then(() => {
-    //                 props.getPostsFunction()
-    //             })
-
-    // }
-    // else if(!likeBoolean){
-    //     setDislikeBoolean(true)
-    //     setDislike(prevDislike => prevDislike +1 )
-
-    //     axios.put(
-    //             `https://stormy-springs-28465.herokuapp.com/posts/${props.postID}`,{
-    //             dislikes:dislike+1,
-    //             dislikeBoolean:true
-
-    //     }).then(() => {
-    //         props.getPostsFunction()
-    //     })
-    // }
     }
     return(
         <>
