@@ -64,3 +64,7 @@ padding: .2rem .7rem;
     border-radius:15px;
     border:2px solid black;
   }
+
+  .cardSub {
+    font-size: 8px;
+  }

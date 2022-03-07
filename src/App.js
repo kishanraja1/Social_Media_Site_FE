@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import Auth from './components/Auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +12,6 @@ function App() {
 
 //  form and list of all posts states
   const [allPosts, setAllPosts] = useState([])
-
 
 
   return (
