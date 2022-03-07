@@ -2,6 +2,7 @@ import {useState} from 'react'
 import Auth from './components/Auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
 
 import './App.css';

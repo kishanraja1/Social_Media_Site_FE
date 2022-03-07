@@ -8,75 +8,73 @@ const LikesAndDislikes = (props) => {
     // makes api call
     // IMPORT LIKE AND DISLIKE FROM HEROKU
     const [like, setLike] = useState(props.likes)
-    const [likeBoolean, setLikeBoolean] = useState(props.likeBoolean)
     const [dislike, setDislike] = useState(props.dislikes)
-    const [dislikeBoolean, setDislikeBoolean] = useState(props.dislikeBoolean)
 
-    const addLike = () => {
-        if(likeBoolean){
-        }else if(dislikeBoolean){
-            setLikeBoolean( prevBool => true)
-            setDislikeBoolean(prevBool => false)
-            setLike(prevLike => prevLike +1 )
-            setDislike(prevDislike => prevDislike -1)
+    const addLike = async () => {
+    
+      let likedObject = await axios.put(`http://localhost:3000/likes/${props.userID._id}/${props.postID}`)
 
-            axios.put(
-                    `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
-                    likes: like+1,
-                    dislikes:dislike-1,
-                    dislikeBoolean:false,
-                    likeBoolean:true
-                    }).then(() => {
-                        props.getPostsFunction()
-                    })
-             }
-             else if(!dislikeBoolean ){
-                setLikeBoolean( prevBool => true)
-                setLike(prevLike => prevLike +1 )
-                    axios.put(
-                            `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
-                            likes: like+1,
-                            likeBoolean:true
-                    }).then(() => {
-                        props.getPostsFunction()
-                    })
-                }
+      setLike(likedObject.data.likes)
+      setDislike(likedObject.data.dislikes)
+    //   console.log(likedObject.data);
+    //    setLike(likedObject.)
 
+        // console.log(props.userID._id)
+        // console.log(props.postID);
+        // console.log(likedObject)
+
+      props.getPostsFunction()
+
+    
     }
 
 
-   const addDislike = () => {
-        if(dislikeBoolean){
-        }else if(likeBoolean){
-            setDislikeBoolean(prevBool => true)
-            setLikeBoolean(prevBool => false)
-            setLike(prevLike => prevLike -1)
-            setDislike(prevDislike => prevDislike +1 )
+   const addDislike = async () => {
 
-            axios.put(
-                    `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
-                    likes: like-1,
-                    dislikes:dislike+1,
-                    dislikeBoolean:true,
-                    likeBoolean:false
-                    }).then(() => {
-                        props.getPostsFunction()
-                    })
 
-        }
-        else if(!likeBoolean){
-            setDislikeBoolean(true)
-            setDislike(prevDislike => prevDislike +1 )
+    let likedObject = await axios.put(`http://localhost:3000/likes/${props.userID._id}/${props.postID}/dislike`)
 
-            axios.put(
-                    `https://stormy-springs-28465.herokuapp.com/posts/${props.id}`,{
-                    dislikes:dislike+1,
-                    dislikeBoolean:true
+    setLike(likedObject.data.likes)
+    setDislike(likedObject.data.dislikes)
+    //   console.log(likedObject.data);
+    //    setLike(likedObject.)
 
-            }).then(() => {
-                props.getPostsFunction()
-            })
-        }
+    // console.log(props.userID._id)
+    // console.log(props.postID);
+    // console.log(likedObject)
+
+    props.getPostsFunction()
+    // if(dislikeBoolean){
+    // }else if(likeBoolean){
+    //     setDislikeBoolean(prevBool => true)
+    //     setLikeBoolean(prevBool => false)
+    //     setLike(prevLike => prevLike -1)
+    //     setDislike(prevDislike => prevDislike +1 )
+
+    //     axios.put(
+    //             `https://stormy-springs-28465.herokuapp.com/posts/${props.postID}`,{
+    //             likes: like-1,
+    //             dislikes:dislike+1,
+    //             dislikeBoolean:true,
+    //             likeBoolean:false
+    //             }).then(() => {
+    //                 props.getPostsFunction()
+    //             })
+
+    // }
+    // else if(!likeBoolean){
+    //     setDislikeBoolean(true)
+    //     setDislike(prevDislike => prevDislike +1 )
+
+    //     axios.put(
+    //             `https://stormy-springs-28465.herokuapp.com/posts/${props.postID}`,{
+    //             dislikes:dislike+1,
+    //             dislikeBoolean:true
+
+    //     }).then(() => {
+    //         props.getPostsFunction()
+    //     })
+    // }
     }
     return(
         <>
