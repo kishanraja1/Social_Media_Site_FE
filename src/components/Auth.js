@@ -79,8 +79,8 @@ const Auth = (props) => {
     ).then((res) => {
       setUserObj(res.data)
       
-      axios.get(`https://stormy-springs-28465.herokuapp.com/likes/default/${res.data._id}`).then((reply) => {
-        console.log(reply)
+      axios.get(`https://stormy-springs-28465.herokuapp.com/likes/default/${res.data?._id}`).then((reply) => {
+        // console.log(reply)
       })
       
       // console.log(res.data);
